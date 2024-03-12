@@ -18,7 +18,7 @@ public class BookingTest {
     @Test
     public void testFindBookingExisting() throws Exception {
 
-        Booking booking = FakeDataBooking.createBookingResponseDto();
+        Booking booking = FakeDataBooking.createBooking();
         when(bookingService.findBookingById("1")).thenReturn(Optional.of(booking));
 
         mockMvc.perform(get(BASE_URL + "1"))
