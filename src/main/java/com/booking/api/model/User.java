@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,4 +28,16 @@ public class User implements Serializable {
     private LocalDateTime createUser;
     @DBRef
     private List<Booking> bookingHistory;
+
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.createUser = LocalDateTime.now();
+        this.bookingHistory = new ArrayList<>();
+    }
+
+    public void addBookingToHistoryUser(Booking booking){
+        bookingHistory.add(booking);
+    }
 }

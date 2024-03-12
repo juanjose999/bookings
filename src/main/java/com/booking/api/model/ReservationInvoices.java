@@ -23,6 +23,4 @@ public class ReservationInvoices implements Serializable {
     private LocalDate invoicesIssueDate;
     private List<User> userDetailsList;
     private List<Booking> detailsTrip;
-    private double costTrip;
-
 }

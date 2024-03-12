@@ -28,4 +28,25 @@ public class Booking implements Serializable {
     private LocalDate departureHour;
     private String durationTrip;
     private String seatNumber;
+    private double costTrip;
+
+    public Booking(User userData, String originLocation, String destination, LocalDate departureTime, LocalDate departureHour, String durationTrip, String seatNumber) {
+        this.userData = userData;
+        this.originLocation = originLocation;
+        this.destination = destination;
+        this.departureTime = departureTime;
+        this.departureHour = departureHour;
+        this.durationTrip = durationTrip;
+        this.seatNumber = seatNumber;
+        updateCostTrip();
+    }
+
+    public void updateCostTrip(){
+        if(durationTrip != null){
+            int hoursTrip = Integer.parseInt(durationTrip);
+            double costHour = 20.000;
+            double costTotal = costHour*hoursTrip;
+            this.setCostTrip(costTotal);
+        }
+    }
 }
