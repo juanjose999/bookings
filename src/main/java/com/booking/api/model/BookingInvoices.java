@@ -15,11 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "reservationInvoices")
-public class ReservationInvoices implements Serializable {
+public class BookingInvoices implements Serializable {
     @Serial
     private final static long serialVersionUID = 1L;
     @Id
-    private String idInvoices;
+    private String idInvoice;
     private LocalDate invoicesIssueDate;
     private List<User> userDetailsList;
     private List<Booking> detailsTrip;
