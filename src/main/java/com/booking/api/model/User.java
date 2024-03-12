@@ -1,5 +1,6 @@
 package com.booking.api.model;
 
+import com.booking.api.model.dto.bookinginvoice.BookingInvoiceDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class User implements Serializable {
     private String email;
     private LocalDateTime createUser;
     @DBRef
-    private List<Booking> bookingHistory;
+    private List<BookingInvoiceDto> bookingHistory;
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -37,7 +38,7 @@ public class User implements Serializable {
         this.bookingHistory = new ArrayList<>();
     }
 
-    public void addBookingToHistoryUser(Booking booking){
+    public void addBookingToHistoryUser(BookingInvoiceDto booking){
         bookingHistory.add(booking);
     }
 }

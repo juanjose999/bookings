@@ -1,6 +1,8 @@
 package com.booking.api.repository.booking;
 
+import com.booking.api.exception.BookingNotFoundException;
 import com.booking.api.model.Booking;
+import com.booking.api.repository.user.UserMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +12,6 @@ import java.util.Optional;
 public class BookingRepositoryImpl implements BookingRepository{
     @Autowired
     private  BookingMongoRepository bookingMongoRepository;
-
 
     @Override
     public List<Booking> getAllBookings() {
@@ -42,8 +43,10 @@ public class BookingRepositoryImpl implements BookingRepository{
             existingBooking.setCostTrip(booking.getCostTrip());
             bookingMongoRepository.save(existingBooking);
             return existingBooking;
+
+
         }else {
-            throw new BookingNotFoundException("Booking with ID: "  + idBooking + " not found");
+            throw new BookingNotFoundException(idBooking);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.booking.api.model.dto.booking;
 
 import com.booking.api.model.Booking;
+import com.booking.api.model.dto.user.UserDto;
 
 public class BookingMapper {
 

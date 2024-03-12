@@ -1,6 +1,8 @@
 package com.booking.api.model.dto.booking;
 
 import com.booking.api.model.User;
+import com.booking.api.model.dto.user.UserDto;
+import com.booking.api.model.dto.user.UserResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class BookingResponseDto {
     private String idBooking;
-    private User userData;
+    private UserDto userData;
     private String originLocation;
     private String destination;
     private LocalDate departureTime;
@@ -20,4 +22,5 @@ public class BookingResponseDto {
     private String durationTrip;
     private String seatNumber;
     private double costTrip;
+
 }

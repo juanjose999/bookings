@@ -1,5 +1,6 @@
 package com.booking.api.model;
 
+import com.booking.api.model.dto.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class Booking implements Serializable {
     @Id
     private String idBooking;
     @DBRef
-    private User userData;
+    private UserDto userData;
     private String originLocation;
     private String destination;
     private LocalDate departureTime;
@@ -30,7 +31,7 @@ public class Booking implements Serializable {
     private String seatNumber;
     private double costTrip;
 
-    public Booking(User userData, String originLocation, String destination, LocalDate departureTime, LocalDate departureHour, String durationTrip, String seatNumber) {
+    public Booking(UserDto userData, String originLocation, String destination, LocalDate departureTime, LocalDate departureHour, String durationTrip, String seatNumber) {
         this.userData = userData;
         this.originLocation = originLocation;
         this.destination = destination;
@@ -40,6 +41,7 @@ public class Booking implements Serializable {
         this.seatNumber = seatNumber;
         updateCostTrip();
     }
+
 
     public void updateCostTrip(){
         if(durationTrip != null){
