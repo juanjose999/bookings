@@ -39,7 +39,6 @@ public class BookingInvoiceServiceImpl implements BookingInvoiceService {
         BookingInvoice bookingInvoice = bookingInvoicesRepository.updateBookingInvoice(idBookingInvoice, BookingInvoiceMapper.bookingInvoicesDtoToBookingInvoice(bookingInvoiceDto));
         return BookingInvoiceMapper.bookingToBookingResponseDto(bookingInvoice);
 
-
     }
 
     @Override

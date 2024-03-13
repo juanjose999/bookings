@@ -1,5 +1,6 @@
 package com.booking.api.service.booking;
 
+import com.booking.api.exception.BookingNotFoundException;
 import com.booking.api.model.Booking;
 import com.booking.api.model.dto.booking.BookingDto;
 import com.booking.api.model.dto.booking.BookingMapper;
@@ -20,30 +21,32 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class BookingServiceImpl implements BookingService{
-
     @Autowired
     private BookingRepository bookingRepository;
+
     @Autowired
     private UserService userService;
     @Autowired
     private BookingInvoiceService bookingInvoiceService;
     @Override
     public List<BookingResponseDto> getAllBookings() {
-        List<BookingResponseDto> responseDto = new ArrayList<>();
-        bookingRepository.getAllBookings().forEach(booking -> responseDto.add(BookingMapper.bookingToBookingResponseDto(booking)));
-        return responseDto;
+        List<Booking> bookings = bookingRepository.getAllBookings();
+        return bookings.stream()
+                .map(BookingMapper::bookingToBookingResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<BookingResponseDto> findBookingById(String idBooking) {
-        Optional<Booking> findBooking = bookingRepository.findBookingById(idBooking);
-        if(findBooking.isPresent()){
-            Booking existinBooking = findBooking.get();
-            return Optional.of(BookingMapper.bookingToBookingResponseDto(existinBooking));
+        Optional<Booking> searchBooking = bookingRepository.findBookingById(idBooking);
+        if(searchBooking.isPresent()){
+            return Optional.of(BookingMapper.bookingToBookingResponseDto(searchBooking.get()));
         }else {
-            return Optional.empty();
+            throw  new BookingNotFoundException("Booking not found with ID: " + idBooking);
         }
     }
 
@@ -53,12 +56,12 @@ public class BookingServiceImpl implements BookingService{
         UserDto userDto = bookingDto.getUserData();
         UserResponseDto savedUser = userService.saveUser(userDto);
 
-        Booking booking = bookingRepository.saveBooking(BookingMapper.bookingDtoToBooking(bookingDto));
+        Booking bookingDto1 = bookingRepository.saveBooking(BookingMapper.bookingDtoToBooking(bookingDto));
 
         BookingInvoiceDto bookingInvoiceDto = new BookingInvoiceDto(
                 LocalDate.now(),
                 userDto,
-                booking,
+                bookingDto,
                 "ADA TRAVEL"
         );
         userDto.addBookingInvoiceToHistory(bookingInvoiceDto);
@@ -66,16 +69,22 @@ public class BookingServiceImpl implements BookingService{
 
         BookingInvoiceResponseDto savedInvoice = bookingInvoiceService.saveBookingInvoice(bookingInvoiceDto);
 
-        return BookingMapper.bookingToBookingResponseDto(booking);
+        return BookingMapper.bookingToBookingResponseDto(BookingMapper.bookingDtoToBooking(bookingDto));
     }
 
     @Override
     public BookingResponseDto updateBooking(String idBooking, BookingDto bookingDto) {
-        return null;
+            Optional<Booking> booking = bookingRepository.findBookingById(idBooking);
+            if(booking.isPresent()){
+                Booking updateBooking = bookingRepository.updateBooking(idBooking, BookingMapper.bookingDtoToBooking(bookingDto));
+                return BookingMapper.bookingToBookingResponseDto(updateBooking);
+            }else {
+                throw new BookingNotFoundException(idBooking);
+            }
     }
 
     @Override
     public Boolean deleteBookingById(String idBooking) {
-        return null;
+        return bookingRepository.deleteBookingById(idBooking);
     }
 }

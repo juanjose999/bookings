@@ -1,6 +1,7 @@
 package com.booking.api.model;
 
 import com.booking.api.model.dto.user.UserDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 @Document(collection = "bookings")
 public class Booking implements Serializable {
     @Serial
@@ -25,13 +28,13 @@ public class Booking implements Serializable {
     private UserDto userData;
     private String originLocation;
     private String destination;
-    private LocalDate departureTime;
-    private LocalDate departureHour;
+    private String departureTime;
+    private String departureHour;
     private String durationTrip;
     private String seatNumber;
     private double costTrip;
 
-    public Booking(UserDto userData, String originLocation, String destination, LocalDate departureTime, LocalDate departureHour, String durationTrip, String seatNumber) {
+    public Booking(UserDto userData, String originLocation, String destination, String departureTime, String departureHour, String durationTrip, String seatNumber) {
         this.userData = userData;
         this.originLocation = originLocation;
         this.destination = destination;

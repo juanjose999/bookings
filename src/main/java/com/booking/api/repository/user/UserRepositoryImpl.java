@@ -1,5 +1,6 @@
 package com.booking.api.repository.user;
 
+import com.booking.api.exception.UserNotFoundException;
 import com.booking.api.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,11 +47,12 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public Boolean deleteUserById(String idUser) {
-        User findUser = userMongoRepository.findById(idUser).get();
-        if(findUser != null){
+        Optional<User> findUser = userMongoRepository.findById(idUser);
+        if(findUser.isPresent()){
             userMongoRepository.deleteById(idUser);
             return true;
+        }else {
+            return false;
         }
-        return false;
     }
 }

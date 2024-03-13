@@ -20,8 +20,11 @@ public class UserDto {
     private String email;
     private List<BookingInvoiceDto> bookingHistory;  // Agrega el historial de facturas
 
-    // Otros métodos y constructor
-
+    public UserDto(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
 
     // Método para agregar una factura al historial y devolver un nuevo UserDto actualizado

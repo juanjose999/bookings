@@ -2,7 +2,6 @@ package com.booking.api.repository.booking;
 
 import com.booking.api.exception.BookingNotFoundException;
 import com.booking.api.model.Booking;
-import com.booking.api.repository.user.UserMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +19,7 @@ public class BookingRepositoryImpl implements BookingRepository{
 
     @Override
     public Optional<Booking> findBookingById(String idBooking) {
-        Optional<Booking> findBooking = bookingMongoRepository.findById(idBooking);
-        return Optional.ofNullable(findBooking.orElse(null));
+        return bookingMongoRepository.findById(idBooking);
     }
 
     @Override
@@ -43,8 +41,6 @@ public class BookingRepositoryImpl implements BookingRepository{
             existingBooking.setCostTrip(booking.getCostTrip());
             bookingMongoRepository.save(existingBooking);
             return existingBooking;
-
-
         }else {
             throw new BookingNotFoundException(idBooking);
         }

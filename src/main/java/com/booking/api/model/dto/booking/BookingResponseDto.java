@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,8 +19,8 @@ public class BookingResponseDto {
     private UserDto userData;
     private String originLocation;
     private String destination;
-    private LocalDate departureTime;
-    private LocalDate departureHour;
+    private String departureTime;
+    private String departureHour;
     private String durationTrip;
     private String seatNumber;
     private double costTrip;

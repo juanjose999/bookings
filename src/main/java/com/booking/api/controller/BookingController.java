@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,19 +36,18 @@ public class BookingController {
         }
     }
 
-    @GetMapping("/{idBooking}")
-    public ResponseEntity<BookingResponseDto> finBookingById(@PathVariable String idBooking){
-        try{
-            Optional<BookingResponseDto> searchBooking = bookingService.findBookingById(idBooking);
-            if(searchBooking.isPresent()){
-                return new ResponseEntity(searchBooking,HttpStatus.OK);
-            }else {
-                return new ResponseEntity("Booking not found with ID: " + idBooking, HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity("Booking not found with ID: " + idBooking, HttpStatus.NOT_FOUND);
+    @GetMapping("{id}")
+    public ResponseEntity<?> findBookingById(@PathVariable String id) {
+        try {
+            BookingResponseDto booking = bookingService.findBookingById(id)
+                    .orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + id));
+
+            return new ResponseEntity<>(booking, HttpStatus.OK);
+        } catch (BookingNotFoundException ex) {
+            return new ResponseEntity(id, HttpStatus.NOT_FOUND);
         }
     }
+
 
     @PostMapping
     public ResponseEntity<BookingResponseDto> saveBooking(@RequestBody BookingDto bookingDto){
@@ -60,31 +61,25 @@ public class BookingController {
 
     @PutMapping("{idBooking}")
     public ResponseEntity<BookingResponseDto> updateBooking(@PathVariable String idBooking, @RequestBody BookingDto bookingDto){
-        try{
-            Optional<BookingResponseDto> updateBooking = bookingService.findBookingById(idBooking);
-            if(updateBooking.isPresent()){
-                BookingResponseDto bookingResponseDto = bookingService.updateBooking(idBooking, bookingDto);
-                return new ResponseEntity<>(bookingResponseDto,HttpStatus.OK);
-            }else {
-                return new ResponseEntity("The booking is not found", HttpStatus.NOT_FOUND);
-            }
-        }catch (BookingNotFoundException e){
-            return new ResponseEntity(idBooking, HttpStatus.NOT_FOUND);
+        try {
+            BookingResponseDto booking = bookingService.findBookingById(idBooking)
+                    .orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + idBooking));
+
+            return new ResponseEntity<>(booking, HttpStatus.OK);
+        } catch (BookingNotFoundException ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{idBooking}")
     public ResponseEntity<Boolean> deleteBookingById(@PathVariable String idBooking){
-        try{
-            Boolean isDeleteBooking = bookingService.deleteBookingById(idBooking);
-            if(isDeleteBooking){
-                return new ResponseEntity("The booking is detele.",HttpStatus.OK);
-            }else {
-                return new ResponseEntity("Error in delete booking.", HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity("Error in delete booking." + e.getMessage(), HttpStatus.NOT_FOUND);
+        Boolean deleted = bookingService.deleteBookingById(idBooking);
+        if (deleted) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
+
     }
 
 }
