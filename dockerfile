@@ -1,6 +1,6 @@
-# Utiliza una imagen base con OpenJDK 17 y Gradle 7.4.0
+# Utiliza una imagen base con OpenJDK 17 y Gradle 7.5.0
 
-FROM gradle:7.4.0-jdk17 AS build
+FROM gradle:7.5.0-jdk17 AS build
 
 # Establece el directorio de trabajo
 
@@ -8,8 +8,8 @@ WORKDIR /app
 
 # Copia los archivos de tu proyecto al directorio de trabajo
 
-COPY . .
-
+COPY build.gradle settings.gradle /app/
+COPY src /app/src/
 # Construye tu aplicación con Gradle
 
 RUN gradle build --no-daemon
