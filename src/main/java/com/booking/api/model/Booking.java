@@ -36,6 +36,20 @@ public class Booking implements Serializable {
     private User userData;
     private String bookingSeller;
 
+    public Booking(String idBooking ,String originLocation, String destination, String departureTime, String departureHour, double hoursTripDuration, String seatNumber, User userData) {
+        this.idBooking = idBooking;
+        bookingCreationDate = getBookingCreationDate();
+        this.bookingSeller = "ADA TRAVEL TECHNOLOGY";
+        this.originLocation = originLocation;
+        this.destination = destination;
+        this.departureTime = departureTime;
+        this.departureHour = departureHour;
+        this.hoursTripDuration = hoursTripDuration;
+        this.seatNumber = seatNumber;
+        this.userData = userData;
+        this.costTrip = getCostTrip();
+    }
+
     public Booking(String originLocation, String destination, String departureTime, String departureHour, double hoursTripDuration, String seatNumber, User userData) {
         bookingCreationDate = getBookingCreationDate();
         this.bookingSeller = "ADA TRAVEL TECHNOLOGY";

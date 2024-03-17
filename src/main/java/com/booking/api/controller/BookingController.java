@@ -21,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/bookings")
+@CrossOrigin(origins = "http://localhost:8082")
 public class BookingController {
 
     @Autowired
@@ -28,7 +29,6 @@ public class BookingController {
 
     @Autowired
     private UserRepository userRepository;
-
     @GetMapping
     public ResponseEntity<List<BookingResponseDto>> getAllBookings(){
         try{
@@ -46,7 +46,7 @@ public class BookingController {
 
             return new ResponseEntity<>(booking, HttpStatus.OK);
         } catch (BookingNotFoundException ex) {
-            return new ResponseEntity(id, HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Booking with ID: " +id+ " not found in data base.", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -65,7 +65,7 @@ public class BookingController {
     public ResponseEntity<BookingResponseDto> updateBooking(@PathVariable String idBooking, @RequestBody BookingDto booking){
         try {
             BookingResponseDto bookingResponseDto = bookingService.updateBooking(idBooking, booking);
-            return new ResponseEntity(bookingResponseDto, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(bookingResponseDto);
         } catch (BookingNotFoundException ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }

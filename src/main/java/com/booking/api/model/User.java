@@ -35,6 +35,14 @@ public class User implements Serializable {
         userCreationDate = getUserCreationDate(); // Cambio de getUserCreationData a getUserCreationDate
     }
 
+    public User( String idUser,String firstName, String lastName, String email) {
+        this.idUser = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        userCreationDate = getUserCreationDate(); // Cambio de getUserCreationData a getUserCreationDate
+    }
+
     public String getUserCreationDate() { // Cambio de getUserCreationData a getUserCreationDate
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

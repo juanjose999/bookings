@@ -10,10 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.booking.api.model.Booking;
 import com.booking.api.model.dto.booking.BookingDto;
 import com.booking.api.model.dto.booking.BookingMapper;
-import com.booking.api.model.dto.bookinginvoice.BookingInvoiceDto;
-import com.booking.api.model.dto.user.UserDto;
-import com.booking.api.repository.booking.BookingRepository;
-import com.booking.api.service.booking.BookingService;
+
 import com.booking.api.service.booking.BookingServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,11 +46,13 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-public class BookingTest {/*
+public class BookingTest {
 
     final String BASE_URL = "/v1/bookings";
     @Autowired
     private MockMvc mockMvc;
+
+
     @MockBean
     private BookingServiceImpl bookingService;
 
@@ -75,15 +74,16 @@ public class BookingTest {/*
         mockMvc.perform(get(BASE_URL +"/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idBooking", is("1")))
-                .andExpect(jsonPath("$.userData.firstName", is("Mr robot")))
-                .andExpect(jsonPath("$.userData.lastName", is("Evil Corp")))
-                .andExpect(jsonPath("$.userData.email", is("fsociety@gmail.com")))
                 .andExpect(jsonPath("$.originLocation", is("Bucaramanga")))
                 .andExpect(jsonPath("$.destination", is("Bogota")))
                 .andExpect(jsonPath("$.departureTime").exists()) // You may need to adjust this based on the actual structure
                 .andExpect(jsonPath("$.departureHour").exists()) // You may need to adjust this based on the actual structure
-                .andExpect(jsonPath("$.durationTrip", is("6")))
-                .andExpect(jsonPath("$.seatNumber", is("18")));
+                .andExpect(jsonPath("$.hoursTripDuration", is(6.0)))
+                .andExpect(jsonPath("$.seatNumber", is("18")))
+                .andExpect(jsonPath("$.userData.lastName", is("Evil Corp")))
+                .andExpect(jsonPath("$.userData.email", is("fsociety@gmail.com")))
+                .andExpect(jsonPath("$.userData.firstName", is("Mr robot")));
+
 
         verify(bookingService, times(1)).findBookingById("1");
     }
@@ -93,10 +93,9 @@ public class BookingTest {/*
     public void testFindBookingByIdNotExisting() throws Exception {
         String nonExistingBookingId = "420";
 
-        mockMvc.perform(get("/v1/bookings/{id}", nonExistingBookingId))
+        mockMvc.perform(get(BASE_URL + "/" + nonExistingBookingId))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$").value(nonExistingBookingId));
-
 
         verify(bookingService, times(1)).findBookingById(nonExistingBookingId);
     }
@@ -116,29 +115,6 @@ public class BookingTest {/*
                 .andExpect(status().isCreated());
 
         verify(bookingService, times(1)).saveBooking(any());
-    }
-
-    @Test
-    public void testUpdateExistingBooking() throws Exception {
-        Booking booking = FakeDataBooking.createBooking(); // Assuming you have a method to create BookingDto without an ID
-        when(bookingService.saveBooking(any())).thenReturn(BookingMapper.bookingToBookingResponseDto(booking));
-        String json = "{\"idBooking\":\"1\",\"userData\":{\"firstName\":\"Mr robot\",\"lastName\":\"Evil Corp\",\"email\":\"fsociety@gmail.com\"},\"originLocation\":\"Bucaramanga\",\"destination\":\"Bogota\",\"departureTime\":\"2024-03-15\",\"departureHour\":\"01:00\",\"durationTrip\":\"6\",\"seatNumber\":\"18\",\"costTrip\":3000.0}";
-
-        mockMvc.perform(post(BASE_URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isCreated());
-
-        verify(bookingService, times(1)).saveBooking(any()); // Puede que necesites ajustar este método según tu implementación
-    }
-
-    @Test
-    public void testUpdateBookingNotExisting() throws Exception {
-        String bookingId = "3";
-        when(bookingService.findBookingById(bookingId)).thenReturn(Optional.empty());
-        ResponseEntity<?> responseEntity = bookingController.updateBooking(bookingId, new BookingDto());
-
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 
 
@@ -164,5 +140,5 @@ public class BookingTest {/*
                 .andExpect(status().isNotFound());
         verify(bookingService, times(1)).deleteBookingById(id);
     }
-*/
+
 }
