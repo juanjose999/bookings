@@ -3,6 +3,9 @@
 ## Overview
 This API allows users to perform CRUD (Create, Read, Update, Delete) operations on bookings. Bookings represent trips from an origin location to a destination. Each booking can be associated with a user.
 
+![diagrama bd mongo](https://github.com/juanjose999/bookings/blob/main/reservation%20(3).png?raw=true)
+
+
 ## Endpoints
 - **Base URL:** `https://bookings-8hdw.onrender.com/v1/bookings`
 
