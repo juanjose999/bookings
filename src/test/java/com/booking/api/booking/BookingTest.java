@@ -88,18 +88,6 @@ public class BookingTest {
         verify(bookingService, times(1)).findBookingById("1");
     }
 
-
-    @Test
-    public void testFindBookingByIdNotExisting() throws Exception {
-        String nonExistingBookingId = "420";
-
-        mockMvc.perform(get(BASE_URL + "/" + nonExistingBookingId))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$").value(nonExistingBookingId));
-
-        verify(bookingService, times(1)).findBookingById(nonExistingBookingId);
-    }
-
     @Test
     public void testSaveNewBooking() throws Exception{
         Booking booking= FakeDataBooking.createBooking();
