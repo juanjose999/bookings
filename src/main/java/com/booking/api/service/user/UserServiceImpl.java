@@ -1,5 +1,6 @@
 package com.booking.api.service.user;
 
+import com.booking.api.exception.UserNotFoundException;
 import com.booking.api.model.User;
 import com.booking.api.model.dto.user.UserDto;
 import com.booking.api.model.dto.user.UserMapper;
@@ -19,26 +20,32 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserResponseDto> getAllUser() {
-        List<UserResponseDto> userResponseDto = new ArrayList<>();
-        userRepository.getAllUser().forEach(user -> userResponseDto.add(UserMapper.userToUserResponseDto(user)));
-        return userResponseDto;
+        List<UserResponseDto> userResponse = new ArrayList<>();
+        userRepository.getAllUser().forEach(user-> userResponse.add(UserMapper.userToUserResponseDto(user)));
+        return userResponse;
     }
 
     @Override
     public Optional<UserResponseDto> findUserById(String idUser) {
         Optional<User> optionalUser = userRepository.findUserById(idUser);
-        return optionalUser.map(UserMapper::userToUserResponseDto);
+        if(optionalUser.isPresent()){
+            User userExisting = optionalUser.get();
+            return Optional.of(UserMapper.userToUserResponseDto(userExisting));
+        }
+        else {
+            throw new UserNotFoundException(idUser);
+        }
     }
 
     @Override
-    public UserResponseDto saveUser(UserDto userDto) {
-        return UserMapper.userToUserResponseDto(UserMapper.userDtoToUser(userDto));
+    public UserResponseDto saveUser(UserDto user) {
+        return UserMapper.userToUserResponseDto(userRepository.saveUser(UserMapper.userDtoToUser(user)));
     }
 
     @Override
-    public UserResponseDto updateUser(String idUser, UserDto userDto) {
-        User existingUser = userRepository.updateUser(idUser, UserMapper.userDtoToUser(userDto));
-        return UserMapper.userToUserResponseDto(existingUser);
+    public UserResponseDto updateUser(String idUser, UserDto user) {
+        User updateUser = userRepository.updateUser(idUser, UserMapper.userDtoToUser(user));
+        return UserMapper.userToUserResponseDto(updateUser);
     }
 
     @Override

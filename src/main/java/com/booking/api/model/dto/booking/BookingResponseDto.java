@@ -16,13 +16,12 @@ import java.time.LocalTime;
 @Data
 public class BookingResponseDto {
     private String idBooking;
-    private UserDto userData;
     private String originLocation;
     private String destination;
     private String departureTime;
     private String departureHour;
-    private String durationTrip;
+    private double hoursTripDuration;
     private String seatNumber;
     private double costTrip;
-
+    private User userData;
 }

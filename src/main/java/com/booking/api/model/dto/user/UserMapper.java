@@ -21,4 +21,13 @@ public class UserMapper {
         );
     }
 
+    public static UserDto userToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        // Otros campos si es necesario
+        return userDto;
+    }
+
 }

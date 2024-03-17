@@ -12,46 +12,57 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 @Document(collection = "bookings")
 public class Booking implements Serializable {
     @Serial
     private final static long serialVersionUID = 1L;
     @Id
     private String idBooking;
-    @DBRef
-    private UserDto userData;
+    private String bookingCreationDate;
     private String originLocation;
     private String destination;
     private String departureTime;
     private String departureHour;
-    private String durationTrip;
+    private double hoursTripDuration;
     private String seatNumber;
     private double costTrip;
+    @DBRef
+    private User userData;
+    private String bookingSeller;
 
-    public Booking(UserDto userData, String originLocation, String destination, String departureTime, String departureHour, String durationTrip, String seatNumber) {
-        this.userData = userData;
+    public Booking(String originLocation, String destination, String departureTime, String departureHour, double hoursTripDuration, String seatNumber, User userData) {
+        bookingCreationDate = getBookingCreationDate();
+        this.bookingSeller = "ADA TRAVEL TECHNOLOGY";
         this.originLocation = originLocation;
         this.destination = destination;
         this.departureTime = departureTime;
         this.departureHour = departureHour;
-        this.durationTrip = durationTrip;
+        this.hoursTripDuration = hoursTripDuration;
         this.seatNumber = seatNumber;
-        updateCostTrip();
+        this.userData = userData;
+        this.costTrip = getCostTrip();
     }
 
-
-    public void updateCostTrip(){
-        if(durationTrip != null){
-            int hoursTrip = Integer.parseInt(durationTrip);
-            double costHour = 20.000;
-            double costTotal = costHour*hoursTrip;
-            this.setCostTrip(costTotal);
+    public double getCostTrip(){
+        if(hoursTripDuration>0){
+            double hoursTrip = hoursTripDuration;
+            double costHour = 200000;
+            return costHour*hoursTrip;
+        }else {
+            throw new RuntimeException("duration hours void, please input data in duration.");
         }
     }
+
+    public String getBookingCreationDate() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return currentDateTime.format(formatter);
+    }
+
 }

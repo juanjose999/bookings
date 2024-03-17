@@ -14,11 +14,11 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class BookingDto {
-    private UserDto userData;
+    private User userData;
     private String originLocation;
     private String destination;
     private String departureTime;
     private String departureHour;
-    private String durationTrip;
+    private double hoursTripDuration;
     private String seatNumber;
 }

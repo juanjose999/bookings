@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface BookingService {
     List<BookingResponseDto> getAllBookings();
     Optional<BookingResponseDto> findBookingById(String idBooking);
-    BookingResponseDto saveBooking(BookingDto bookinDto);
-    BookingResponseDto updateBooking(String idBooking , BookingDto bookingDto);
+    BookingResponseDto saveBooking(BookingDto booking);
+    BookingResponseDto updateBooking(String idBooking , BookingDto booking);
     Boolean deleteBookingById(String idBooking);
 }

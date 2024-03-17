@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository{
 
@@ -21,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public Optional<User> findUserById(String idUser) {
         Optional<User> findUser = userMongoRepository.findById(idUser);
-        return Optional.ofNullable(findUser.orElse(null));
+        return Optional.ofNullable(findUser.orElseThrow(()-> new UserNotFoundException(idUser)));
     }
 
     @Override
@@ -32,18 +34,18 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User updateUser(String idUser, User user) {
         Optional<User> findUser = userMongoRepository.findById(idUser);
-        if(findUser.isPresent()){
+        if (findUser.isPresent()) {
             User existingUser = findUser.get();
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
             existingUser.setEmail(user.getEmail());
-            existingUser.setBookingHistory(user.getBookingHistory());
-            userMongoRepository.save(existingUser);
-            return existingUser;
-        }else {
-            throw new UserNotFoundException("Booking with ID: "  + idUser + " not found");
+            // No es necesario crear un nuevo objeto, solo guardar el usuario existente actualizado
+            return userMongoRepository.save(existingUser);
+        } else {
+            throw new UserNotFoundException(idUser);
         }
     }
+
 
     @Override
     public Boolean deleteUserById(String idUser) {

@@ -2,8 +2,12 @@ package com.booking.api.controller;
 
 import com.booking.api.exception.BookingNotFoundException;
 import com.booking.api.model.Booking;
+import com.booking.api.model.User;
 import com.booking.api.model.dto.booking.BookingDto;
 import com.booking.api.model.dto.booking.BookingResponseDto;
+import com.booking.api.model.dto.user.UserDto;
+import com.booking.api.model.dto.user.UserMapper;
+import com.booking.api.repository.user.UserRepository;
 import com.booking.api.service.booking.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +26,13 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public ResponseEntity<List<BookingResponseDto>> getAllBookings(){
         try{
-            List<BookingResponseDto> bookingResponseDto = bookingService.getAllBookings();
-            if(!bookingResponseDto.isEmpty()){
-                return new ResponseEntity<>(bookingResponseDto,HttpStatus.OK);
-            }else {
-                return new ResponseEntity("Bookings list is empty.", HttpStatus.OK);
-            }
+            return ResponseEntity.ok(bookingService.getAllBookings());
         }catch (Exception e){
             return new ResponseEntity("Error in getAllBookings controller: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -50,22 +52,20 @@ public class BookingController {
 
 
     @PostMapping
-    public ResponseEntity<BookingResponseDto> saveBooking(@RequestBody BookingDto bookingDto){
+    public ResponseEntity<BookingResponseDto> saveBooking(@RequestBody BookingDto booking){
         try{
-            BookingResponseDto bookingResponseDto = bookingService.saveBooking(bookingDto);
-            return new ResponseEntity<>(bookingResponseDto,HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity("Error in saving booking: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            BookingResponseDto response = bookingService.saveBooking(booking);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity("Error in saving booking: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("{idBooking}")
-    public ResponseEntity<BookingResponseDto> updateBooking(@PathVariable String idBooking, @RequestBody BookingDto bookingDto){
+    public ResponseEntity<BookingResponseDto> updateBooking(@PathVariable String idBooking, @RequestBody BookingDto booking){
         try {
-            BookingResponseDto booking = bookingService.findBookingById(idBooking)
-                    .orElseThrow(() -> new BookingNotFoundException("Booking not found with ID: " + idBooking));
-
-            return new ResponseEntity<>(booking, HttpStatus.OK);
+            BookingResponseDto bookingResponseDto = bookingService.updateBooking(idBooking, booking);
+            return new ResponseEntity(bookingResponseDto, HttpStatus.OK);
         } catch (BookingNotFoundException ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -79,7 +79,6 @@ public class BookingController {
         } else {
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
-
     }
 
 }

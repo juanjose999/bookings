@@ -1,6 +1,5 @@
 package com.booking.api.model;
 
-import com.booking.api.model.dto.bookinginvoice.BookingInvoiceDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Data
 @Document(collection = "users")
@@ -26,19 +26,18 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private LocalDateTime createUser;
-    @DBRef
-    private List<BookingInvoiceDto> bookingHistory;
+    private String userCreationDate;
 
-    public User(String firstName, String lastName, String email) {
+    public User( String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.createUser = LocalDateTime.now();
-        this.bookingHistory = new ArrayList<>();
+        userCreationDate = getUserCreationDate(); // Cambio de getUserCreationData a getUserCreationDate
     }
 
-    public void addBookingToHistoryUser(BookingInvoiceDto booking){
-        bookingHistory.add(booking);
+    public String getUserCreationDate() { // Cambio de getUserCreationData a getUserCreationDate
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return currentDateTime.format(formatter);
     }
 }
