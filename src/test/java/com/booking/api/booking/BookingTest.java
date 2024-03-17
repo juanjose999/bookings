@@ -2,8 +2,6 @@ package com.booking.api.booking;
 
 
 import com.booking.api.controller.BookingController;
-import com.booking.api.exception.BookingNotFoundException;
-import com.booking.api.exception.InvoiceNotFoundException;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
