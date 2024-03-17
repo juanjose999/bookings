@@ -1,27 +1,20 @@
 package com.booking.api.controller;
 
 import com.booking.api.exception.BookingNotFoundException;
-import com.booking.api.model.Booking;
-import com.booking.api.model.User;
 import com.booking.api.model.dto.booking.BookingDto;
 import com.booking.api.model.dto.booking.BookingResponseDto;
-import com.booking.api.model.dto.user.UserDto;
-import com.booking.api.model.dto.user.UserMapper;
 import com.booking.api.repository.user.UserRepository;
 import com.booking.api.service.booking.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/bookings")
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "*")
 public class BookingController {
 
     @Autowired
