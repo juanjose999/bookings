@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.931s</div>
+<div class="counter">1.002s</div>
 <p>duration</p>
 </div>
 </td>
@@ -82,7 +82,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.931s</td>
+<td class="success">1.002s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,8 +90,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>09:27:29.444 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.booking.api.ApiApplicationTests]: ApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-09:27:29.608 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.booking.api.ApiApplication for test class com.booking.api.ApiApplicationTests
+<pre>10:02:48.486 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.booking.api.ApiApplicationTests]: ApiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:02:48.607 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.booking.api.ApiApplication for test class com.booking.api.ApiApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -101,16 +101,12 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.3)
 
-2024-03-17T09:27:30.298-05:00  INFO 24812 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : Starting ApiApplicationTests using Java 21 with PID 24812 (started by juancho in C:\Users\juancho\Desktop\programacion\bookingAdaFinish\api\api)
-2024-03-17T09:27:30.300-05:00  INFO 24812 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-03-17T09:27:31.382-05:00  INFO 24812 --- [api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-2024-03-17T09:27:31.468-05:00  INFO 24812 --- [api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 2 MongoDB repository interfaces.
-2024-03-17T09:27:32.152-05:00  INFO 24812 --- [api] [    Test worker] org.mongodb.driver.client                : MongoClient with metadata {&quot;driver&quot;: {&quot;name&quot;: &quot;mongo-java-driver|sync|spring-boot&quot;, &quot;version&quot;: &quot;4.11.1&quot;}, &quot;os&quot;: {&quot;type&quot;: &quot;Windows&quot;, &quot;name&quot;: &quot;Windows 11&quot;, &quot;architecture&quot;: &quot;amd64&quot;, &quot;version&quot;: &quot;10.0&quot;}, &quot;platform&quot;: &quot;Java/Oracle Corporation/21+35-2513&quot;} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='deifiliaortegajaimes', source='admin', password=&lt;hidden&gt;, mechanismProperties=&lt;hidden&gt;}, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@b5b9333, com.mongodb.Jep395RecordCodecProvider@52b959df, com.mongodb.KotlinCodecProvider@38588dea]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[127.0.0.1:27017], srvHost=tiendabarrio.dautlfs.mongodb.net, srvServiceName=mongodb, mode=MULTIPLE, requiredClusterType=REPLICA_SET, requiredReplicaSetName='atlas-e57pln-shard-0', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=true, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
-2024-03-17T09:27:32.288-05:00  INFO 24812 --- [api] [lfs.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-ja7wbtg-shard-00-00.dautlfs.mongodb.net:27017 to client view of cluster
-2024-03-17T09:27:32.329-05:00  INFO 24812 --- [api] [lfs.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-ja7wbtg-shard-00-02.dautlfs.mongodb.net:27017 to client view of cluster
-2024-03-17T09:27:32.334-05:00  INFO 24812 --- [api] [lfs.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-ja7wbtg-shard-00-01.dautlfs.mongodb.net:27017 to client view of cluster
-2024-03-17T09:27:33.632-05:00  INFO 24812 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : Started ApiApplicationTests in 3.672 seconds (process running for 5.408)
-2024-03-17T09:27:33.944-05:00  INFO 24812 --- [api] [ngodb.net:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=ac-ja7wbtg-shard-00-00.dautlfs.mongodb.net:27017, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1073600400, setName='atlas-e57pln-shard-0', canonicalAddress=ac-ja7wbtg-shard-00-00.dautlfs.mongodb.net:27017, hosts=[ac-ja7wbtg-shard-00-00.dautlfs.mongodb.net:27017, ac-ja7wbtg-shard-00-02.dautlfs.mongodb.net:27017, ac-ja7wbtg-shard-00-01.dautlfs.mongodb.net:27017], passives=[], arbiters=[], primary='ac-ja7wbtg-shard-00-01.dautlfs.mongodb.net:27017', tagSet=TagSet{[Tag{name='availabilityZone', value='use1-az1'}, Tag{name='diskState', value='READY'}, Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='US_EAST_1'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=null, setVersion=9, topologyVersion=TopologyVersion{processId=65f5a95f8759da3c0d74bdd1, counter=4}, lastWriteDate=Sun Mar 17 09:27:34 COT 2024, lastUpdateTimeNanos=690471780366000}
+2024-03-17T10:02:49.156-05:00  INFO 11824 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : Starting ApiApplicationTests using Java 21 with PID 11824 (started by juancho in C:\Users\juancho\Desktop\programacion\bookingAdaFinish\api\api)
+2024-03-17T10:02:49.160-05:00  INFO 11824 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-03-17T10:02:50.322-05:00  INFO 11824 --- [api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-03-17T10:02:50.392-05:00  INFO 11824 --- [api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 2 MongoDB repository interfaces.
+2024-03-17T10:02:51.058-05:00  INFO 11824 --- [api] [    Test worker] org.mongodb.driver.client                : MongoClient with metadata {&quot;driver&quot;: {&quot;name&quot;: &quot;mongo-java-driver|sync|spring-boot&quot;, &quot;version&quot;: &quot;4.11.1&quot;}, &quot;os&quot;: {&quot;type&quot;: &quot;Windows&quot;, &quot;name&quot;: &quot;Windows 11&quot;, &quot;architecture&quot;: &quot;amd64&quot;, &quot;version&quot;: &quot;10.0&quot;}, &quot;platform&quot;: &quot;Java/Oracle Corporation/21+35-2513&quot;} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='deifiliaortegajaimes', source='admin', password=&lt;hidden&gt;, mechanismProperties=&lt;hidden&gt;}, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@553d2579, com.mongodb.Jep395RecordCodecProvider@2a8f6e6, com.mongodb.KotlinCodecProvider@1ac730cd]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[127.0.0.1:27017], srvHost=tiendabarrio.dautlfs.mongodb.net, srvServiceName=mongodb, mode=MULTIPLE, requiredClusterType=REPLICA_SET, requiredReplicaSetName='atlas-e57pln-shard-0', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=true, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2024-03-17T10:02:52.558-05:00  INFO 11824 --- [api] [    Test worker] com.booking.api.ApiApplicationTests      : Started ApiApplicationTests in 3.719 seconds (process running for 5.278)
 </pre>
 </span>
 </div>
@@ -132,7 +128,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 17/03/2024, 9:27:48 a. m.</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 17/03/2024, 10:02:54 a. m.</p>
 </div>
 </div>
 </body>
