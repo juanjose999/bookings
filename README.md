@@ -1,4 +1,6 @@
 # API Documentation: Bookings CRUD
+## Documentation swagger UI
+- **Base URL:** `https://bookings-8hdw.onrender.com/swagger-ui/index.html`
 
 ## Overview
 This API allows users to perform CRUD (Create, Read, Update, Delete) operations on bookings. Bookings represent trips from an origin location to a destination. Each booking can be associated with a user.
